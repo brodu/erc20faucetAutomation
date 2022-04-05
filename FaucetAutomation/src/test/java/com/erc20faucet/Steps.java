@@ -41,7 +41,7 @@ public class Steps extends Initializer {
         driver.close();
         driver.switchTo().window(tabs2.get(0));
         driver.get("chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html");
-        Thread.sleep(8000);
+  
         if (MetaMask.getStartedButton.isDisplayed()) {
             MetaMask.getStartedButton.click();
             MetaMask.importWalletButton.click();
