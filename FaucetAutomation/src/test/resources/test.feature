@@ -1,8 +1,8 @@
 @all
 
-Feature: Login and doing things
+Feature: Auto tests for erc20faucet.com
   @random_tag
-  Scenario: doing stuff
+  Scenario: Connecting MetaMask and doing initial tranzaction
     Given I login
     When I change network to Goerli
     And I connect MetaMask
