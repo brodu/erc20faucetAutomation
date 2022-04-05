@@ -41,21 +41,19 @@ public class Steps extends Initializer {
         driver.close();
         driver.switchTo().window(tabs2.get(0));
         driver.get("chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/home.html");
-  
+        waitUntilVisible(MetaMask.getStartedButton, 8000);
         if (MetaMask.getStartedButton.isDisplayed()) {
             MetaMask.getStartedButton.click();
             MetaMask.importWalletButton.click();
             MetaMask.noThanksButton.click();
         }
-        ArrayList <String> recoveryPhrase = new ArrayList<>(12);
 
         for (int i = 0; i < 12; i++){
             String word = Integer.toString(i);
-            recoveryPhrase.add(word);
             MetaMask.importInput.sendKeys(word, "TAB");
         }
-        MetaMask.newPassword.sendKeys("12345678a");
-        MetaMask.repeatPassword.sendKeys("12345678a");
+        MetaMask.newPassword.sendKeys(password);
+        MetaMask.repeatPassword.sendKeys(password);
         MetaMask.submitButton.click();
         MetaMask.allDoneButton.click();
         MetaMask.networkDropdown.click();
@@ -77,15 +75,15 @@ public class Steps extends Initializer {
         throw new PendingException();
     }
 
-    @When("^I click Mint Free Tockens button$")
-    public void i_click_Mint_Free_Tockens_button() throws Throwable {
-        Faucet.mintFreeToken.click();
-        throw new PendingException();
-    }
-
-    @When("^I approve transaction$")
-    public void i_approve_transaction() throws Throwable {
-        MetaMask.submitTransaction.click();
-        throw new PendingException();
+    @When("^I click {$button} button")
+    public void i_click_button(String button) throws Throwable {
+        if (button.equalsIgnoreCase("mintFreeToken")) {
+            Faucet.mintFreeToken.click();
+        }
+        else if (button.equalsIgnoreCase("submitTransaction"))
+        {
+            MetaMask.submitTransaction.click();
+        }
+            throw new PendingException();
     }
 }
